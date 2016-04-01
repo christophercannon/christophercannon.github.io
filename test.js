@@ -1,39 +1,42 @@
 $(document).ready(function() {
 	
-	$('#bandInput').keypress(function (e) {
+	$('#bandInput').keypress(queryDBfunction);
+  $('#doSearch').on('click',queryDBfunction);
+
+
+  function queryDBfunction (e) {
     if(event.keyCode == 13) {
       var valBandInput = $('#bandInput').val();
       console.log(valBandInput);
       e.preventDefault();
-      var discogsApi = "https://api.discogs.com/database/search?q=";
-      var discogsKey = "&key=WwxjcqYkafscMAPPikTJ";
-      var discogsSecret = "&secret=uwErYCQYspUPCqzmwfdoLwHdflJQJjbQ";
-      var url = discogsApi + valBandInput + discogsKey + discogsSecret;
+      var discogsApiUrl = "https://api.discogs.com/database/search";
       $('#bandInput').val("");
       $('#allThumbs').empty();
 
-      $.ajax({
-        url: url,
-        method: "GET",
-        dataType: "jsonp",
-        success: function(response) {
-          console.log(url);
-          console.log(response);
-          var data = response.data;
+      var params = {
+        q: '',
+        key: 'WwxjcqYkafscMAPPikTJ',
+        secret: 'uwErYCQYspUPCqzmwfdoLwHdflJQJjbQ',
+        type:'release',
+        year: 1982,
+        style: 'hardcore'
+      };
 
-          for(var i=0; i<response.data.results.length; i++) {
-            var thumbImg = response.data.results[i].thumb;
-            console.log(thumbImg);
-            var newThumb = $('<div class="thumb"></div>');
-            newThumb.css('background-image', 'url("' + thumbImg + '")');
-            $( '#allThumbs' ).append( newThumb );
-            $('#bandName').text(response.data.results[0].title);
-          }        
-            console.log(response.data.results[0].uri)
-        }
+      $.getJSON(discogsApiUrl, params, function(response) {
+        console.log('response',response);
+        var results = response.results;
 
-      })
+        $.each(results, function(index, item){
+          var thumbImg = item.thumb;
+          // console.log(thumbImg);
+          var newThumb = $('<div class="thumb"></div>');
+          newThumb.css('background-image', 'url("' + thumbImg + '")');
+          $( '#allThumbs' ).append( newThumb );
+          $('#bandName').text(item.title);     
+          console.log(item.uri)
+        });
+          
+      });
     };
-  });
-
+  }
 })
