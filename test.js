@@ -1,7 +1,13 @@
 $(document).ready(function() {
 	
 	$('#bandInput').keypress(queryDBfunction);
-  $('#doSearch').on('click',queryDBfunction);
+  $('#doSearch').on('click', queryDBfunction);
+
+  function getRandomYear(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  };
+  var randomYear = getRandomYear(1980, 1990);
+  console.log(randomYear);
 
 
   function queryDBfunction (e) {
@@ -18,7 +24,7 @@ $(document).ready(function() {
         key: 'WwxjcqYkafscMAPPikTJ',
         secret: 'uwErYCQYspUPCqzmwfdoLwHdflJQJjbQ',
         type:'release',
-        year: 1982,
+        year: randomYear,
         style: 'hardcore'
       };
 
