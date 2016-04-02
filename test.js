@@ -38,7 +38,7 @@ $(document).ready(function() {
           var newThumb = $('<div class="thumb"></div>');
           newThumb.css('background-image', 'url("' + thumbImg + '")');
           $( '#allThumbs' ).append( newThumb );
-          $('#bandName').text(item.title);     
+          // $('#bandName').text(item.title);     
           console.log(item.uri)
         });
           
