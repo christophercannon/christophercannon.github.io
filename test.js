@@ -17,7 +17,8 @@ $(document).ready(function() {
         q: '',
         key: 'WwxjcqYkafscMAPPikTJ',
         secret: 'uwErYCQYspUPCqzmwfdoLwHdflJQJjbQ',
-        type:'release',
+        type:'master', // was 'release'
+        // sort: 'want%2Cdesc',
         year: valYearInput,
         style: selectedStyle
       };
@@ -25,6 +26,7 @@ $(document).ready(function() {
       $.getJSON(discogsApiUrl, params, function(response) {
         console.log('response',response);
         var results = response.results;
+        // var pagination = response.pagination;
 
         $.each(results, function(index, item){
           var thumbImg = item.thumb;
@@ -32,7 +34,6 @@ $(document).ready(function() {
           var newThumb = $('<div class="thumb"></div>');
           newThumb.css('background-image', 'url("' + thumbImg + '")');
           $( '#allThumbs' ).append( newThumb );
-          // $('#bandName').text(item.title);     
           console.log(item.uri)
         });
           
