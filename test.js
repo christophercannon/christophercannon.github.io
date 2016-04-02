@@ -1,22 +1,16 @@
 $(document).ready(function() {
 	
-	$('#bandInput').keypress(queryDBfunction);
+	// $('#bandInput').keypress(queryDBfunction);
   $('#doSearch').on('click', queryDBfunction);
 
-  function getRandomYear(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  };
-  var randomYear = getRandomYear(1980, 1990);
-  console.log(randomYear);
-
-
   function queryDBfunction (e) {
-    if(event.keyCode == 13) {
-      var valBandInput = $('#bandInput').val();
-      console.log(valBandInput);
+      var selectedStyle = $('select[name="dropdown"]').val();
+      var valYearInput = $('#yearInput').val();
+      console.log(selectedStyle, valYearInput);
       e.preventDefault();
       var discogsApiUrl = "https://api.discogs.com/database/search";
-      $('#bandInput').val("");
+      $('select[name="dropdown"]').val("Select a musical style");
+      $('#yearInput').val("");
       $('#allThumbs').empty();
 
       var params = {
@@ -24,8 +18,8 @@ $(document).ready(function() {
         key: 'WwxjcqYkafscMAPPikTJ',
         secret: 'uwErYCQYspUPCqzmwfdoLwHdflJQJjbQ',
         type:'release',
-        year: randomYear,
-        style: 'hardcore'
+        year: valYearInput,
+        style: selectedStyle
       };
 
       $.getJSON(discogsApiUrl, params, function(response) {
@@ -43,6 +37,6 @@ $(document).ready(function() {
         });
           
       });
-    };
+    
   }
 })

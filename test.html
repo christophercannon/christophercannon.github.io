@@ -7,9 +7,19 @@
 </head>
 <body>
 
-  <input class='input' id='bandInput' value="hardcore" placeholder="Enter a band name"></input>
-  <button id="doSearch">Search</button>
-  <div id="bandName"></div>
+  <select id="styleMenu" name="dropdown" size=1>
+    <option>Select a musical style</option>
+    <option value="Hardcore">Hardcore</option>
+    <option value="Doom Metal">Doom Metal</option>
+    <option value="Reggae">Reggae</option>
+    <option value="Shoegaze">Shoegaze</option>
+    <option value="Hip Hop">Hip hop</option>
+    <option value="Surf">Surf</option>
+    
+  </select>
+
+  <input class='input' id='yearInput' placeholder="Enter a year"></input>
+  <button id="doSearch">Do it!</button>
 
   <div id="allThumbs">
     <!-- <div class="thumb"></div> -->
@@ -18,5 +28,7 @@
 	<!-- <script src="jquery-1.12.2.min.js.css"></script> -->
   <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script src="test.js" type="text/javascript" charset="utf-8" async defer></script>
+
+
 </body>
 </html>
