@@ -14,8 +14,10 @@ $(document).ready(function() {
       $('#bandA-img, #bandB-img').empty();
       $('#bandA-name, #bandB-name').empty();
       $('#voteForA, #voteForB').css({'display': 'none'});
-      // $('select[name="dropdown"]').val("Select a musical style");
-      // $('#yearInput').val("");
+
+      // resets vote btn functionality on new matchup
+      $( "#voteForA, #voteForB" ).prop( "disabled", false );
+      $( "#voteForA, #voteForB" ).css({'cursor': 'pointer'});
 
       var params = {
         q: '', // query empty, can get user input for refined search
