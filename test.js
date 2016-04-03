@@ -13,6 +13,8 @@ $(document).ready(function() {
       var discogsApiUrl = "https://api.discogs.com/database/search";
       $('#bandA-img, #bandB-img').empty();
       $('#bandA-name, #bandB-name').empty();
+      $('#voteForA').css({'display': 'none'});
+      $('#voteForB').css({'display': 'none'});
       // $('select[name="dropdown"]').val("Select a musical style");
       // $('#yearInput').val("");
 
