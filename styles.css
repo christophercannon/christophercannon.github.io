@@ -1,3 +1,7 @@
+body {
+	font-family: sans-serif;
+}
+
 #styleMenu {
 	display: block;
 	float: left;
@@ -18,4 +22,12 @@
 	width: 150px;
 	background-color: #efefef;
 	margin: 0 5px 5px 0;
+}
+
+#bandA-name, #bandB-name {
+	height: 100px;
+}
+
+#voteForA, #voteForB {
+	display: none;
 }

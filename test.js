@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	
+  var bandBattleData = new Firebase("https://bandbattle.firebaseio.com/");
+
 	// $('#bandInput').keypress(queryDBfunction);
   $('#doSearch').on('click', queryDBfunction);
 
@@ -38,6 +40,7 @@ $(document).ready(function() {
         newThumb.css('background-image', 'url("' + thumbImgA + '")');
         $( '#bandA-img' ).append( newThumb );
         $('#bandA-name').text(results[rand1].title);
+        $('#voteForA').css({'display': 'block'});
 
         // generate random object B
         var rand2 = Math.floor(Math.random() * results.length);
@@ -47,8 +50,30 @@ $(document).ready(function() {
         var newThumb = $('<div class="thumb"></div>');
         newThumb.css('background-image', 'url("' + thumbImgB + '")');
         $( '#bandB-img' ).append( newThumb );
-        $('#bandB-name').text(results[rand2].title);          
+        $('#bandB-name').text(results[rand2].title); 
+        $('#voteForB').css({'display': 'block'});         
       });
     
   }
+
+  // Vote functions
+  $('#voteForA').on('click', function() {
+        console.log('A vote for A')
+        var bandARef = bandBattleData.child("Matchup 1");
+        bandARef.set({
+          BandA: {
+            record: "record title",
+            votes: 1
+          },
+          BandB: {
+            record: "record title",
+            votes: 1
+          }
+        });
+      })
+
+  $('#voteForB').on('click', function() {
+    console.log('A vote for B')
+  })
+
 })
