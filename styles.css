@@ -1,5 +1,11 @@
 body {
 	font-family: sans-serif;
+	margin: 20px;
+}
+
+h1 {
+	padding: 0px;
+	margin: 0px 0px 20px 0px;
 }
 
 #styleMenu {
@@ -9,9 +15,13 @@ body {
 	width: 100%;
 }
 
+#yearInput {
+  width: 160px;
+}
+
 #bandA-element, #bandB-element {
 	/*display: block;*/
-	width: 175px;
+	width: 150px;
 	float: left;
 	margin: 20px 40px 0px 0px;
 }
@@ -30,4 +40,8 @@ body {
 
 #voteForA, #voteForB {
 	display: none;
+}
+
+#voteForA:hover, #voteForB:hover {
+  cursor: pointer;
 }

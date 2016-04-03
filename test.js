@@ -13,19 +13,19 @@ $(document).ready(function() {
       var discogsApiUrl = "https://api.discogs.com/database/search";
       $('#bandA-img, #bandB-img').empty();
       $('#bandA-name, #bandB-name').empty();
-      $('#voteForA').css({'display': 'none'});
-      $('#voteForB').css({'display': 'none'});
+      $('#voteForA, #voteForB').css({'display': 'none'});
       // $('select[name="dropdown"]').val("Select a musical style");
       // $('#yearInput').val("");
 
       var params = {
-        q: '',
+        q: '', // query empty, can get user input for refined search
         key: 'WwxjcqYkafscMAPPikTJ',
         secret: 'uwErYCQYspUPCqzmwfdoLwHdflJQJjbQ',
         type:'master', // was 'release'
         // sort: 'want%2Cdesc',
         year: valYearInput,
-        style: selectedStyle
+        style: selectedStyle,
+        per_page: 100
       };
 
       $.getJSON(discogsApiUrl, params, function(response) {
@@ -72,10 +72,14 @@ $(document).ready(function() {
             votes: 1
           }
         });
+    $( "#voteForA, #voteForB" ).prop( "disabled", true ); // disables vote button after vote is cast
+    $( "#voteForA, #voteForB" ).css({'cursor': 'default'}); // hides pointer after casting vote
       })
 
   $('#voteForB').on('click', function() {
     console.log('A vote for B')
+    $( "#voteForA, #voteForB" ).prop( "disabled", true ); // disables vote button after vote is cast
+    $( "#voteForA, #voteForB" ).css({'cursor': 'default'}); // hides pointer after casting vote
   })
 
 })
