@@ -9,9 +9,10 @@ $(document).ready(function() {
       console.log(selectedStyle, valYearInput);
       e.preventDefault();
       var discogsApiUrl = "https://api.discogs.com/database/search";
-      $('select[name="dropdown"]').val("Select a musical style");
-      $('#yearInput').val("");
-      $('#allThumbs').empty();
+      $('#bandA-img, #bandB-img').empty();
+      $('#bandA-name, #bandB-name').empty();
+      // $('select[name="dropdown"]').val("Select a musical style");
+      // $('#yearInput').val("");
 
       var params = {
         q: '',
@@ -26,17 +27,27 @@ $(document).ready(function() {
       $.getJSON(discogsApiUrl, params, function(response) {
         console.log('response',response);
         var results = response.results;
-        // var pagination = response.pagination;
+        // console.log(results)
 
-        $.each(results, function(index, item){
-          var thumbImg = item.thumb;
-          // console.log(thumbImg);
-          var newThumb = $('<div class="thumb"></div>');
-          newThumb.css('background-image', 'url("' + thumbImg + '")');
-          $( '#allThumbs' ).append( newThumb );
-          console.log(item.uri)
-        });
-          
+        // generate random object A
+        var rand1 = Math.floor(Math.random() * results.length);
+          // console.log(rand1 + ' out of ' + results.length);
+        var thumbImgA = results[rand1].thumb;
+        console.log(thumbImgA);
+        var newThumb = $('<div class="thumb"></div>');
+        newThumb.css('background-image', 'url("' + thumbImgA + '")');
+        $( '#bandA-img' ).append( newThumb );
+        $('#bandA-name').text(results[rand1].title);
+
+        // generate random object B
+        var rand2 = Math.floor(Math.random() * results.length);
+          // console.log(rand1 + ' out of ' + results.length);
+        var thumbImgB = results[rand2].thumb;
+        console.log(thumbImgB);
+        var newThumb = $('<div class="thumb"></div>');
+        newThumb.css('background-image', 'url("' + thumbImgB + '")');
+        $( '#bandB-img' ).append( newThumb );
+        $('#bandB-name').text(results[rand2].title);          
       });
     
   }

@@ -7,22 +7,34 @@
 </head>
 <body>
 
-  <select id="styleMenu" name="dropdown" size=1>
-    <option>Select a musical style</option>
-    <option value="Hardcore">Hardcore</option>
-    <option value="Doom Metal">Doom Metal</option>
-    <option value="Reggae">Reggae</option>
-    <option value="Shoegaze">Shoegaze</option>
-    <option value="Hip Hop">Hip hop</option>
-    <option value="Surf">Surf</option>
-    
-  </select>
+  <h1>Battle of the Bands</h1>
 
-  <input class='input' id='yearInput' placeholder="Enter a year"></input>
-  <button id="doSearch">Do it!</button>
+  <div id="styleMenu">
+    <select name="dropdown" size=1>
+      <option>Select a musical style</option>
+      <option value="Hardcore">Hardcore</option>
+      <option value="Doom Metal">Doom Metal</option>
+      <option value="Reggae">Reggae</option>
+      <option value="Shoegaze">Shoegaze</option>
+      <option value="Hip Hop">Hip hop</option>
+      <option value="Surf">Surf</option>
+      <option value="Post-Punk">Post-Punk</option>
+      <option value="Garage Rock">Garage Rock</option>
+    </select>
 
-  <div id="allThumbs">
-    <!-- <div class="thumb"></div> -->
+    <input class='input' id='yearInput' placeholder="Enter a year"></input>
+    <button id="doSearch">Do it!</button>
+  </div>
+
+
+  <div id="bandA-element">
+    <div id="bandA-img"></div>
+    <div id="bandA-name"></div>
+  </div>
+
+  <div id="bandB-element">
+    <div id="bandB-img"></div>
+    <div id="bandB-name"></div>
   </div>
 	
 	<!-- <script src="jquery-1.12.2.min.js.css"></script> -->

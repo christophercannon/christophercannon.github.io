@@ -1,5 +1,15 @@
-#allThumbs {
-	margin-top: 40px;
+#styleMenu {
+	display: block;
+	float: left;
+	margin-bottom: 40px;
+	width: 100%;
+}
+
+#bandA-element, #bandB-element {
+	/*display: block;*/
+	width: 175px;
+	float: left;
+	margin: 20px 40px 0px 0px;
 }
 
 .thumb {
