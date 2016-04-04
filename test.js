@@ -60,28 +60,11 @@ $(document).ready(function() {
     
   }
 
-  // Vote functions
-  $('#voteForA').on('click', function() {
-        console.log('A vote for A')
-        var bandARef = bandBattleData.child("Matchup 1");
-        bandARef.set({
-          BandA: {
-            record: "record title",
-            votes: 1
-          },
-          BandB: {
-            record: "record title",
-            votes: 1
-          }
-        });
-    $( "#voteForA, #voteForB" ).prop( "disabled", true ); // disables vote button after vote is cast
-    $( "#voteForA, #voteForB" ).css({'cursor': 'default'}); // hides pointer after casting vote
-      })
-
-  $('#voteForB').on('click', function() {
-    console.log('A vote for B')
+  // Vote reset button function
+  $('#voteForA, #voteForB').on('click', function voteReset() {
     $( "#voteForA, #voteForB" ).prop( "disabled", true ); // disables vote button after vote is cast
     $( "#voteForA, #voteForB" ).css({'cursor': 'default'}); // hides pointer after casting vote
   })
+
 
 })
