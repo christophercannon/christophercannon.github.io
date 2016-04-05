@@ -66,5 +66,72 @@ $(document).ready(function() {
     $( "#voteForA, #voteForB" ).css({'cursor': 'default'}); // hides pointer after casting vote
   })
 
+  // Vote functions
+  // $('#voteForA').on('click', function() {
+  //       console.log('One vote for A');
+  //       var bandARef = bandBattleData.child("Matchup 1");
+  //       bandARef.set({
+  //         BandA: {
+  //           record: "record title",
+  //           votes: 1
+  //         },
+  //         BandB: {
+  //           record: "record title",
+  //           votes: 1
+  //         }
+  //       });
+  //   })
+
+  // Band B voting function
+  // sends input to Firebase
+  $('#voteForB').on('click', function(e) {
+    e.preventDefault(); // sending data thru javascript, NOT HTML
+    console.log('One vote for B');
+
+    var $voteBInput = $('div#bandB-name');
+    console.log($voteBInput);
+
+    bandBattleData.child('band-album').push({
+      text: $voteBInput.text(),
+      votes: 0
+    })
+
+    // reset input field
+    $voteBInput.val("");
+  })
+
+  // reads messages from Firebase
+  function getBandName() {
+    bandBattleData.child('band-album').on('value', function(results) {
+      $('#bandB-results').empty(); // prevents full list from being repeated on new input
+      var values = results.val();
+
+      for(var key in values) {
+        console.log(values[key]);
+        var bandAlbumName = values[key];
+        var upvote = $('<button data-id="' + key + '">vote</button>');
+        var container = $("<p>" + bandAlbumName.text + ", " + bandAlbumName.votes + " votes</p>");
+
+        container.append(upvote);
+        // or: upvote.appendTo(container);
+
+        upvote.click(function() {
+          console.log(bandAlbumName);
+          var bandAlbumNameID = $(this).data('id');
+          updateVotes(bandAlbumNameID, values[bandAlbumNameID].votes + 1);
+        })
+
+        container.appendTo('#bandB-results');
+      }
+    })
+  }
+
+  // updating data
+  function updateVotes(bandAlbumNameID, votes) {
+    var ref = new Firebase("https://bandbattle.firebaseio.com/messages/" + bandAlbumNameID);
+    ref.update({ votes: votes });
+  }
+
+  getBandName();
 
 })
