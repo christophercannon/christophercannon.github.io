@@ -111,7 +111,7 @@ $(document).ready(function() {
     //   votes: votes + 1
     // })
 
-    updateVotes($voteBInput.text(), votes);
+    updateVotes($voteBInput.text(), 0);
 
     // reset input field
     $voteBInput.val("");
