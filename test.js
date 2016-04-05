@@ -85,16 +85,33 @@ $(document).ready(function() {
   // Band B voting function
   // sends input to Firebase
   $('#voteForB').on('click', function(e) {
+    var votes;
     e.preventDefault(); // sending data thru javascript, NOT HTML
-    console.log('One vote for B');
+    // console.log('One vote for B');
 
     var $voteBInput = $('div#bandB-name');
     console.log($voteBInput);
 
-    bandBattleData.child('band-album').push({
-      text: $voteBInput.text(),
-      votes: 0
+    var ref = new Firebase("https://bandbattle.firebaseio.com/matchups/");
+
+    ref.on("value", function(res) { 
+      if(res.hasChild($voteBInput.text())) {
+        console.log($voteBInput.text() + " is already in Firebase");
+        votes = votes + 1;
+      } else {
+        console.log($voteBInput.text() + " is NOT found in Firebase");
+        votes = 1;
+      }
     })
+
+    // console.log(bandBattleData.child('matchups').set())
+
+    // bandBattleData.child('matchups').push({
+    //   text: $voteBInput.text(),
+    //   votes: votes + 1
+    // })
+
+    updateVotes($voteBInput.text(), votes);
 
     // reset input field
     $voteBInput.val("");
@@ -102,7 +119,7 @@ $(document).ready(function() {
 
   // reads messages from Firebase
   function getBandName() {
-    bandBattleData.child('band-album').on('value', function(results) {
+    bandBattleData.child('matchups').on('value', function(results) {
       $('#bandB-results').empty(); // prevents full list from being repeated on new input
       var values = results.val();
 
@@ -121,14 +138,14 @@ $(document).ready(function() {
           updateVotes(bandAlbumNameID, values[bandAlbumNameID].votes + 1);
         })
 
-        container.appendTo('#bandB-results');
+        // container.appendTo('#bandB-results');
       }
     })
   }
 
   // updating data
   function updateVotes(bandAlbumNameID, votes) {
-    var ref = new Firebase("https://bandbattle.firebaseio.com/messages/" + bandAlbumNameID);
+    var ref = new Firebase("https://bandbattle.firebaseio.com/matchups/" + bandAlbumNameID);
     ref.update({ votes: votes });
   }
 
