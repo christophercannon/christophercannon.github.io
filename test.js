@@ -40,14 +40,25 @@ $(document).ready(function() {
         var rand1 = Math.floor(Math.random() * results.length);
           // console.log(rand1 + ' out of ' + results.length);
         var thumbImgA = results[rand1].thumb;
+        var IdImgA = results[rand1].id;
         console.log(rand1);
         console.log(thumbImgA);
 
         // gets id # from result
         // need to pass this id into a new API call and place in 'master'
         // then try 
-        var resourceURL = results[rand1].resource_url;
-        console.log(resourceURL);
+        $.getJSON('https://api.discogs.com/masters/' + IdImgA, function(getBigImg) {
+          var resourceURL = results[rand1].resource_url;
+          console.log(resourceURL);
+          console.log('url: ', getBigImg);
+          var bigImgResults = getBigImg.images[0];
+          // var bigImgUrl = results.images;
+          console.log(bigImgResults);
+          var newBigThumb = $('<div class="bigThumb"></div>');
+          newBigThumb.css('background-image', 'url("' + bigImgResults + '")');
+          $( '#test' ).append( newBigThumb );
+        });
+        //////////////////////////////////////////
 
         var newThumb = $('<div class="thumb"></div>');
         newThumb.css('background-image', 'url("' + thumbImgA + '")');

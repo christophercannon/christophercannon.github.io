@@ -45,3 +45,20 @@ h1 {
 #voteForA:hover, #voteForB:hover {
   cursor: pointer;
 }
+
+#test {
+	display: block;
+	float: right;
+	right: 10px;
+	top: 10px;
+	width: 400px;
+	height: 400px;
+}
+
+.bigThumb {
+	display: inline-block;
+	height: 400px;
+	width: 400px;
+	background-color: #efefef;
+	margin: 0;
+}
