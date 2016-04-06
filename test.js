@@ -14,6 +14,7 @@ $(document).ready(function() {
       $('#bandA-img, #bandB-img').empty();
       $('#bandA-name, #bandB-name').empty();
       $('#voteForA, #voteForB').css({'display': 'none'});
+      $('#bandA-results, #bandB-results').empty();
 
       // resets vote btn functionality on new matchup
       $( "#voteForA, #voteForB" ).prop( "disabled", false );
@@ -67,20 +68,9 @@ $(document).ready(function() {
   })
 
   // Vote functions
-  // $('#voteForA').on('click', function() {
-  //       console.log('One vote for A');
-  //       var bandARef = bandBattleData.child("Matchup 1");
-  //       bandARef.set({
-  //         BandA: {
-  //           record: "record title",
-  //           votes: 1
-  //         },
-  //         BandB: {
-  //           record: "record title",
-  //           votes: 1
-  //         }
-  //       });
-  //   })
+  
+  // To avoid repeating functions for A and B,
+  // create a function that passes A or B as parameters in this function
 
   // Band B voting function
   // sends input to Firebase
@@ -90,65 +80,58 @@ $(document).ready(function() {
     // console.log('One vote for B');
 
     var $voteBInput = $('div#bandB-name');
-    console.log($voteBInput);
+    // console.log($voteBInput);
 
     var ref = new Firebase("https://bandbattle.firebaseio.com/matchups/");
 
-    ref.on("value", function(res) { 
-      if(res.hasChild($voteBInput.text())) {
-        console.log($voteBInput.text() + " is already in Firebase");
-        votes = votes + 1;
+    ref.once("value", function(snapshot) { 
+      var inputArtist = $voteBInput.html();
+
+      var hasArtist = snapshot.hasChild(inputArtist);
+
+      console.log(hasArtist);
+
+      if (hasArtist) {
+        console.log(inputArtist + " is already in Firebase");
+
+        //new firebase that includes album name at end like on line 152.
+        var getVotes = new Firebase("https://bandbattle.firebaseio.com/matchups/" + inputArtist);
+        console.log(getVotes);
+        //pull the votes value from the new firebase and set votes votes to equal it
+        getVotes.once('value', function(snapshot){
+          album = snapshot.val();
+         
+          var votes = album.votes;
+
+          console.log(typeof votes);
+          console.log('votes', votes);
+
+          var updatedVotes = votes += 1;
+
+          console.log('updatedVotes', updatedVotes);
+
+          $('#bandB-results').html(updatedVotes + ' people voted for this album.');
+
+          updateVotes(inputArtist, updatedVotes);
+        })
+
+
       } else {
-        console.log($voteBInput.text() + " is NOT found in Firebase");
+        console.log(inputArtist + " is NOT found in Firebase");
         votes = 1;
+        updateVotes(inputArtist, 1);
+        $('#bandB-results').html(votes + ' people voted for this album.');
       }
     })
-
-    // console.log(bandBattleData.child('matchups').set())
-
-    // bandBattleData.child('matchups').push({
-    //   text: $voteBInput.text(),
-    //   votes: votes + 1
-    // })
-
-    updateVotes($voteBInput.text(), 0);
 
     // reset input field
     $voteBInput.val("");
   })
-
-  // reads messages from Firebase
-  function getBandName() {
-    bandBattleData.child('matchups').on('value', function(results) {
-      $('#bandB-results').empty(); // prevents full list from being repeated on new input
-      var values = results.val();
-
-      for(var key in values) {
-        console.log(values[key]);
-        var bandAlbumName = values[key];
-        var upvote = $('<button data-id="' + key + '">vote</button>');
-        var container = $("<p>" + bandAlbumName.text + ", " + bandAlbumName.votes + " votes</p>");
-
-        container.append(upvote);
-        // or: upvote.appendTo(container);
-
-        upvote.click(function() {
-          console.log(bandAlbumName);
-          var bandAlbumNameID = $(this).data('id');
-          updateVotes(bandAlbumNameID, values[bandAlbumNameID].votes + 1);
-        })
-
-        // container.appendTo('#bandB-results');
-      }
-    })
-  }
 
   // updating data
   function updateVotes(bandAlbumNameID, votes) {
     var ref = new Firebase("https://bandbattle.firebaseio.com/matchups/" + bandAlbumNameID);
     ref.update({ votes: votes });
   }
-
-  getBandName();
 
 })
