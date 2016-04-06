@@ -40,7 +40,15 @@ $(document).ready(function() {
         var rand1 = Math.floor(Math.random() * results.length);
           // console.log(rand1 + ' out of ' + results.length);
         var thumbImgA = results[rand1].thumb;
+        console.log(rand1);
         console.log(thumbImgA);
+
+        // gets id # from result
+        // need to pass this id into a new API call and place in 'master'
+        // then try 
+        var resourceURL = results[rand1].resource_url;
+        console.log(resourceURL);
+
         var newThumb = $('<div class="thumb"></div>');
         newThumb.css('background-image', 'url("' + thumbImgA + '")');
         $( '#bandA-img' ).append( newThumb );
@@ -51,6 +59,7 @@ $(document).ready(function() {
         var rand2 = Math.floor(Math.random() * results.length);
           // console.log(rand1 + ' out of ' + results.length);
         var thumbImgB = results[rand2].thumb;
+        console.log(rand2);
         console.log(thumbImgB);
         var newThumb = $('<div class="thumb"></div>');
         newThumb.css('background-image', 'url("' + thumbImgB + '")');
@@ -93,10 +102,9 @@ $(document).ready(function() {
 
       if (hasArtist) {
         console.log(inputArtist + " is already in Firebase");
-
-        //new firebase that includes album name at end like on line 152.
         var getVotes = new Firebase("https://bandbattle.firebaseio.com/matchups/" + inputArtist);
         console.log(getVotes);
+
         //pull the votes value from the new firebase and set votes votes to equal it
         getVotes.once('value', function(snapshot){
           album = snapshot.val();
@@ -110,7 +118,7 @@ $(document).ready(function() {
 
           console.log('updatedVotes', updatedVotes);
 
-          $('#bandB-results').html(updatedVotes + ' people voted for this album.');
+          $('#bandB-results').html('You and ' + (updatedVotes-1) + ' other people like this album.');
 
           updateVotes(inputArtist, updatedVotes);
         })
@@ -120,7 +128,7 @@ $(document).ready(function() {
         console.log(inputArtist + " is NOT found in Firebase");
         votes = 1;
         updateVotes(inputArtist, 1);
-        $('#bandB-results').html(votes + ' people voted for this album.');
+        $('#bandB-results').html('You are the first person to like this album.');
       }
     })
 
