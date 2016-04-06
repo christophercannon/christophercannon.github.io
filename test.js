@@ -15,6 +15,7 @@ $(document).ready(function() {
       $('#bandA-name, #bandB-name').empty();
       $('#voteForA, #voteForB').css({'display': 'none'});
       $('#bandA-results, #bandB-results').empty();
+      $( '#test' ).empty();
 
       // resets vote btn functionality on new matchup
       $( "#voteForA, #voteForB" ).prop( "disabled", false );
@@ -46,7 +47,6 @@ $(document).ready(function() {
 
         // gets id # from result
         // need to pass this id into a new API call and place in 'master'
-        // then try 
         $.getJSON('https://api.discogs.com/masters/' + IdImgA, function(getBigImg) {
           var resourceURL = results[rand1].resource_url;
           console.log(resourceURL);
@@ -87,20 +87,24 @@ $(document).ready(function() {
     $( "#voteForA, #voteForB" ).css({'cursor': 'default'}); // hides pointer after casting vote
   })
 
-  // Vote functions
-  
-  // To avoid repeating functions for A and B,
-  // create a function that passes A or B as parameters in this function
 
-  // Band B voting function
-  // sends input to Firebase
-  $('#voteForB').on('click', function(e) {
+  // A and B voting function
+  $('#voteForA, #voteForB').on('click', function(e) {
     var votes;
     e.preventDefault(); // sending data thru javascript, NOT HTML
     // console.log('One vote for B');
+    var dataid = $(e.target).attr('data-id')
+    voteEvent(dataid)
+  })
 
-    var $voteBInput = $('div#bandB-name');
+
+  // sends input to Firebase
+  function voteEvent(dataid){
+    console.log(dataid)
+    var $voteBInput = $('div#band'+dataid+'-name');
     // console.log($voteBInput);
+
+    console.log(dataid, $voteBInput)
 
     var ref = new Firebase("https://bandbattle.firebaseio.com/matchups/");
 
@@ -129,7 +133,7 @@ $(document).ready(function() {
 
           console.log('updatedVotes', updatedVotes);
 
-          $('#bandB-results').html('You and ' + (updatedVotes-1) + ' other people like this album.');
+          $('#band'+dataid+'-results').html('You and ' + (updatedVotes-1) + ' other people like this album.');
 
           updateVotes(inputArtist, updatedVotes);
         })
@@ -139,13 +143,13 @@ $(document).ready(function() {
         console.log(inputArtist + " is NOT found in Firebase");
         votes = 1;
         updateVotes(inputArtist, 1);
-        $('#bandB-results').html('You are the first person to like this album.');
+        $('#band'+dataid+'-results').html('You are the first person to like this album.');
       }
     })
 
     // reset input field
     $voteBInput.val("");
-  })
+  }
 
   // updating data
   function updateVotes(bandAlbumNameID, votes) {

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>test connection</title>
+	<title>Battle of the Bands</title>
   <link rel="stylesheet" href="styles.css">
   <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 </head>
@@ -24,7 +24,7 @@
       <option value="Garage Rock">Garage Rock</option>
     </select>
 
-    <input class='input' id='yearInput' placeholder="Enter a year or timespan"></input>
+    <input class='input' id='yearInput' placeholder="Enter a year or timespan" maxlength="4"></input>
     <button id="doSearch">Do it!</button>
   </div>
 
@@ -32,14 +32,14 @@
   <div id="bandA-element">
     <div id="bandA-img"></div>
     <div id="bandA-name"></div>
-    <button id="voteForA">This one rules!</button>
+    <button id="voteForA" data-id="A">This one rules!</button>
     <div id="bandA-results"></div>
   </div>
 
   <div id="bandB-element">
     <div id="bandB-img"></div>
     <div id="bandB-name"></div>
-    <button id="voteForB">No, this one rules!</button>
+    <button id="voteForB" data-id="B">No, this one rules!</button>
     <div id="bandB-results"></div>
   </div>
 
