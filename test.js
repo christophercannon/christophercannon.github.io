@@ -24,6 +24,15 @@ $(document).ready(function() {
       $( "#voteForA, #voteForB" ).prop( "disabled", false );
       $( "#voteForA, #voteForB" ).css({'cursor': 'pointer'});
 
+      // logic to further specify return results
+      var genreType = 'Rock';
+      if(selectedStyle == 'Hip Hop') {
+        genreType = 'Hip Hop';
+      } else if(selectedStyle == 'Reggae') {
+        genreType = 'Reggae';
+      }
+      console.log(genreType);
+
       var params = {
         q: '', // query empty, can get user input for refined search
         key: 'WwxjcqYkafscMAPPikTJ',
@@ -31,9 +40,11 @@ $(document).ready(function() {
         type:'master', // was 'release'
         // sort: 'want%2Cdesc',
         year: valYearInput,
+        genre: genreType,
         style: selectedStyle,
         per_page: 100
       };
+
 
       $.getJSON(discogsApiUrl, params, function(response) {
         console.log('response',response);
