@@ -4,6 +4,9 @@ $(document).ready(function() {
 
 	// $('#bandInput').keypress(queryDBfunction);
   $('#doSearch').on('click', queryDBfunction);
+  $('#yearInput').on('keypress', function(e) {
+    if(e.keyCode == 13) queryDBfunction(e);
+  })
 
   function queryDBfunction (e) {
       var selectedStyle = $('select[name="dropdown"]').val();
@@ -45,21 +48,6 @@ $(document).ready(function() {
         console.log(rand1);
         console.log(thumbImgA);
 
-        // gets id # from result
-        // need to pass this id into a new API call and place in 'master'
-        $.getJSON('https://api.discogs.com/masters/' + IdImgA, function(getBigImg) {
-          var resourceURL = results[rand1].resource_url;
-          console.log(resourceURL);
-          console.log('url: ', getBigImg);
-          var bigImgResults = getBigImg.images[0];
-          // var bigImgUrl = results.images;
-          console.log(bigImgResults);
-          var newBigThumb = $('<div class="bigThumb"></div>');
-          newBigThumb.css('background-image', 'url("' + bigImgResults + '")');
-          $( '#test' ).append( newBigThumb );
-        });
-        //////////////////////////////////////////
-
         var newThumb = $('<div class="thumb"></div>');
         newThumb.css('background-image', 'url("' + thumbImgA + '")');
         $( '#bandA-img' ).append( newThumb );
@@ -76,7 +64,22 @@ $(document).ready(function() {
         newThumb.css('background-image', 'url("' + thumbImgB + '")');
         $( '#bandB-img' ).append( newThumb );
         $('#bandB-name').text(results[rand2].title); 
-        $('#voteForB').css({'display': 'block'});         
+        $('#voteForB').css({'display': 'block'});
+
+        // gets id # from result
+        // need to pass this id into a new API call and place in 'master'
+        $.getJSON('https://api.discogs.com/masters/' + IdImgA, function(getBigImg) {
+          var resourceURL = results[rand1].resource_url;
+          console.log(resourceURL);
+          console.log('url: ', getBigImg);
+          var bigImgResults = getBigImg.images[0];
+          // var bigImgUrl = results.images;
+          console.log(bigImgResults);
+          var newBigThumb = $('<div class="bigThumb"></div>');
+          newBigThumb.css('background-image', 'url("' + bigImgResults + '")');
+          $( '#test' ).append( newBigThumb );
+        });
+        //////////////////////////////////////////        
       });
     
   }
