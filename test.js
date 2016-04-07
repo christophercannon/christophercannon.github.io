@@ -65,32 +65,46 @@ $(document).ready(function() {
         $('#bandA-name').text(results[rand1].title);
         $('#voteForA').css({'display': 'block'});
 
-        // generate random object B
-        var rand2 = Math.floor(Math.random() * results.length);
-          // console.log(rand1 + ' out of ' + results.length);
-        var thumbImgB = results[rand2].thumb;
-        console.log(rand2);
-        console.log(thumbImgB);
-        var newThumb = $('<div class="thumb"></div>');
-        newThumb.css('background-image', 'url("' + thumbImgB + '")');
-        $( '#bandB-img' ).append( newThumb );
-        $('#bandB-name').text(results[rand2].title); 
-        $('#voteForB').css({'display': 'block'});
 
-        // gets id # from result
-        // need to pass this id into a new API call and place in 'master'
-        $.getJSON('https://api.discogs.com/masters/' + IdImgA, function(getBigImg) {
-          var resourceURL = results[rand1].resource_url;
-          console.log(resourceURL);
-          console.log('url: ', getBigImg);
-          var bigImgResults = getBigImg.images[0];
-          // var bigImgUrl = results.images;
-          console.log(bigImgResults);
-          var newBigThumb = $('<div class="bigThumb"></div>');
-          newBigThumb.css('background-image', 'url("' + bigImgResults + '")');
-          $( '#test' ).append( newBigThumb );
-        });
-        //////////////////////////////////////////        
+        // new function to avoid duplicate numbers
+        function numCheck(n1) {
+          var n2 = Math.floor(Math.random() * results.length);
+          console.log(n1, n2);
+          if(n1==n2) {
+            numCheck(n1);
+          } else {
+            nonDupeNum(n2)}
+        }
+
+        // generate random object B
+        numCheck(rand1);
+        function nonDupeNum(rand2) {
+          // generate random object B
+          // console.log(rand1 + ' out of ' + results.length);
+          var thumbImgB = results[rand2].thumb;
+          console.log(rand2);
+          console.log(thumbImgB);
+          var newThumb = $('<div class="thumb"></div>');
+          newThumb.css('background-image', 'url("' + thumbImgB + '")');
+          $( '#bandB-img' ).append( newThumb );
+          $('#bandB-name').text(results[rand2].title); 
+          $('#voteForB').css({'display': 'block'});
+
+          // function to retrieve larger images
+          // gets id # from thumbnail results
+          // passes this id into a new API call and places in 'master'
+          // $.getJSON('https://api.discogs.com/masters/' + IdImgA, function(getBigImg) {
+          //   var resourceURL = results[rand1].resource_url;
+          //   console.log(resourceURL);
+          //   console.log('url: ', getBigImg);
+          //   var bigImgResults = getBigImg.images[0];
+          //   // var bigImgUrl = results.images;
+          //   console.log(bigImgResults);
+          //   var newBigThumb = $('<div class="bigThumb"></div>');
+          //   newBigThumb.css('background-image', 'url("' + bigImgResults + '")');
+          //   $( '#test' ).append( newBigThumb );
+          // });
+        }        
       });
     
   }
