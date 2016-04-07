@@ -14,6 +14,8 @@ $(document).ready(function() {
       console.log(selectedStyle, valYearInput);
       e.preventDefault();
       var discogsApiUrl = "https://api.discogs.com/database/search";
+
+      // reset img and text divs
       $('#bandA-img, #bandB-img').empty();
       $('#bandA-name, #bandB-name').empty();
       $('#voteForA, #voteForB').css({'display': 'none'});
@@ -45,7 +47,6 @@ $(document).ready(function() {
         per_page: 100
       };
 
-
       $.getJSON(discogsApiUrl, params, function(response) {
         console.log('response',response);
         var results = response.results;
@@ -61,9 +62,11 @@ $(document).ready(function() {
 
         var newThumb = $('<div class="thumb"></div>');
         newThumb.css('background-image', 'url("' + thumbImgA + '")');
-        $( '#bandA-img' ).append( newThumb );
+        $(newThumb).fadeOut(0).fadeIn(1500);
+        $('#bandA-img').append( newThumb );
+        $('#bandA-name').fadeOut(0).fadeIn(1500);
         $('#bandA-name').text(results[rand1].title);
-        $('#voteForA').css({'display': 'block'});
+        $('#voteForA').fadeOut(0).fadeIn(1500);
 
 
         // new function to avoid duplicate numbers
@@ -86,9 +89,11 @@ $(document).ready(function() {
           console.log(thumbImgB);
           var newThumb = $('<div class="thumb"></div>');
           newThumb.css('background-image', 'url("' + thumbImgB + '")');
-          $( '#bandB-img' ).append( newThumb );
+          $(newThumb).fadeOut(0).fadeIn(1500);
+          $('#bandB-img').append( newThumb );
+          $('#bandB-name').fadeOut(0).fadeIn(1500);
           $('#bandB-name').text(results[rand2].title); 
-          $('#voteForB').css({'display': 'block'});
+          $('#voteForB').fadeOut(0).fadeIn(1500);
 
           // function to retrieve larger images
           // gets id # from thumbnail results
