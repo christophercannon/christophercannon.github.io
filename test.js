@@ -53,9 +53,7 @@ $(document).ready(function() {
         // console.log(results);
         if(results == 0) {
           alert('nothing to return!');
-        } else if(results == 1) {
-          alert('Only one record returned. Try again.');
-        }
+        } 
 
         // generate random object A
         var rand1 = Math.floor(Math.random() * results.length);
@@ -86,7 +84,13 @@ $(document).ready(function() {
         }
 
         // generate random object B
-        numCheck(rand1);
+        // checks for results array length
+        if(results.length > 1) {
+          numCheck(rand1);
+        } else if(results.length == 1) {
+          alert('Only one record returned. Try again.');
+        }
+        
         function nonDupeNum(rand2) {
           // generate random object B
           // console.log(rand1 + ' out of ' + results.length);
