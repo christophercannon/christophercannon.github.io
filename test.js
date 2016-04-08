@@ -50,7 +50,12 @@ $(document).ready(function() {
       $.getJSON(discogsApiUrl, params, function(response) {
         console.log('response',response);
         var results = response.results;
-        // console.log(results)
+        // console.log(results);
+        if(results == 0) {
+          alert('nothing to return!');
+        } else if(results == 1) {
+          alert('Only one record returned. Try again.');
+        }
 
         // generate random object A
         var rand1 = Math.floor(Math.random() * results.length);
@@ -76,7 +81,8 @@ $(document).ready(function() {
           if(n1==n2) {
             numCheck(n1);
           } else {
-            nonDupeNum(n2)}
+            nonDupeNum(n2);
+          }
         }
 
         // generate random object B
@@ -109,7 +115,12 @@ $(document).ready(function() {
           //   newBigThumb.css('background-image', 'url("' + bigImgResults + '")');
           //   $( '#test' ).append( newBigThumb );
           // });
-        }        
+
+          if(thumbImgA == '' || thumbImgB == '') {
+            alert('no image!');
+          }
+        }
+
       });
     
   }
