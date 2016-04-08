@@ -1,8 +1,8 @@
 $(document).ready(function() {
-	
+  
   var bandBattleData = new Firebase("https://bandbattle.firebaseio.com/");
 
-	// $('#bandInput').keypress(queryDBfunction);
+  // $('#bandInput').keypress(queryDBfunction);
   $('#doSearch').on('click', queryDBfunction);
   $('#yearInput').on('keypress', function(e) {
     if(e.keyCode == 13) queryDBfunction(e);
@@ -53,7 +53,7 @@ $(document).ready(function() {
         // console.log(results);
         if(results == 0) {
           alert('nothing to return!');
-        } 
+        }
 
         // generate random object A
         var rand1 = Math.floor(Math.random() * results.length);
@@ -71,6 +71,10 @@ $(document).ready(function() {
         $('#bandA-name').text(results[rand1].title);
         $('#voteForA').fadeOut(0).fadeIn(1500);
 
+        // replace funky characters in band or album name that cause mayhem
+        var str = document.getElementById('bandA-name').innerHTML;
+        var validChar = str.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
+        document.getElementById('bandA-name').innerHTML = validChar;
 
         // new function to avoid duplicate numbers
         function numCheck(n1) {
@@ -104,6 +108,9 @@ $(document).ready(function() {
           $('#bandB-name').fadeOut(0).fadeIn(1500);
           $('#bandB-name').text(results[rand2].title); 
           $('#voteForB').fadeOut(0).fadeIn(1500);
+
+          var validChar = results[rand2].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">');
+          document.getElementById('bandB-name').innerHTML = validChar;
 
           // function to retrieve larger images
           // gets id # from thumbnail results
