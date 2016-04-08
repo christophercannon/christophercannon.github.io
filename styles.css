@@ -38,6 +38,10 @@ h1 {
 	height: 100px;
 }
 
+.albumName {
+	color: #ff6633;
+}
+
 #voteForA, #voteForB {
 	display: none;
 }
