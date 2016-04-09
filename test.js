@@ -60,7 +60,7 @@ $(document).ready(function() {
         var rand1 = Math.floor(Math.random() * results.length);
           // console.log(rand1 + ' out of ' + results.length);
         var thumbImgA = results[rand1].thumb;
-        var IdImgA = results[rand1].id;
+        var linkImgA = ('http://discogs.com' + results[rand1].uri);
         console.log(rand1);
         console.log(thumbImgA);
 
@@ -68,6 +68,7 @@ $(document).ready(function() {
         newThumb.css('background-image', 'url("' + thumbImgA + '")');
         $(newThumb).fadeOut(0).fadeIn(1500);
         $('#bandA-img').append( newThumb );
+        $('#bandA-img').wrap( '<a href="' + linkImgA + '" target="_blank"></a>' );
         $('#bandA-name').fadeOut(0).fadeIn(1500);
         $('#bandA-name').html(results[rand1].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>')
             .attr('data-name' , results[rand1].title.replace(/[\\\/]/g,'')); 
@@ -101,12 +102,14 @@ $(document).ready(function() {
           // generate random object B
           // console.log(rand1 + ' out of ' + results.length);
           var thumbImgB = results[rand2].thumb;
+          var linkImgB = ('http://discogs.com' + results[rand2].uri);
           console.log(rand2);
           console.log(thumbImgB);
           var newThumb = $('<div class="thumb"></div>');
           newThumb.css('background-image', 'url("' + thumbImgB + '")');
           $(newThumb).fadeOut(0).fadeIn(1500);
           $('#bandB-img').append( newThumb );
+          $('#bandB-img').wrap( '<a href="' + linkImgB + '" target="_blank"></a>' );
           $('#bandB-name').fadeOut(0).fadeIn(1500);
           $('#bandB-name').html(results[rand2].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>')
             .attr('data-name' , results[rand2].title.replace(/[\\\/]/g,'')); 
