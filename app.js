@@ -35,6 +35,7 @@ $(document).ready(function() {
       }
       console.log(genreType);
 
+
       var params = {
         q: '', // query empty, can get user input for refined search
         key: 'WwxjcqYkafscMAPPikTJ',
@@ -56,9 +57,8 @@ $(document).ready(function() {
           alert('nothing to return!');
         }
 
-        // generate random object A
+        // generate random object A /////////////////////////////////////////////////
         var rand1 = Math.floor(Math.random() * results.length);
-          // console.log(rand1 + ' out of ' + results.length);
         var thumbImgA = results[rand1].thumb;
         var linkImgA = ('http://discogs.com' + results[rand1].uri);
         console.log(rand1);
@@ -74,11 +74,6 @@ $(document).ready(function() {
             .attr('data-name' , results[rand1].title.replace(/[\\\/]/g,'')); 
         $('#voteForA').fadeOut(0).fadeIn(1500);
 
-        // replace funky characters in band or album name that cause mayhem
-        // var str = document.getElementById('bandA-name').innerHTML;
-        // var validChar = str.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
-        // document.getElementById('bandA-name').innerHTML = validChar;
-
         // new function to avoid duplicate numbers
         function numCheck(n1) {
           var n2 = Math.floor(Math.random() * results.length);
@@ -90,7 +85,7 @@ $(document).ready(function() {
           }
         }
 
-        // generate random object B
+        // generate random object B /////////////////////////////////////////////////
         // checks for results array length
         if(results.length > 1) {
           numCheck(rand1);
@@ -100,7 +95,6 @@ $(document).ready(function() {
         
         function nonDupeNum(rand2) {
           // generate random object B
-          // console.log(rand1 + ' out of ' + results.length);
           var thumbImgB = results[rand2].thumb;
           var linkImgB = ('http://discogs.com' + results[rand2].uri);
           console.log(rand2);
@@ -115,24 +109,6 @@ $(document).ready(function() {
             .attr('data-name' , results[rand2].title.replace(/[\\\/]/g,'')); 
           $('#voteForB').fadeOut(0).fadeIn(1500);
 
-          // var validChar = results[rand2].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">');
-          // document.getElementById('bandB-name').innerHTML = validChar;
-
-          // function to retrieve larger images
-          // gets id # from thumbnail results
-          // passes this id into a new API call and places in 'master'
-          // $.getJSON('https://api.discogs.com/masters/' + IdImgA, function(getBigImg) {
-          //   var resourceURL = results[rand1].resource_url;
-          //   console.log(resourceURL);
-          //   console.log('url: ', getBigImg);
-          //   var bigImgResults = getBigImg.images[0];
-          //   // var bigImgUrl = results.images;
-          //   console.log(bigImgResults);
-          //   var newBigThumb = $('<div class="bigThumb"></div>');
-          //   newBigThumb.css('background-image', 'url("' + bigImgResults + '")');
-          //   $( '#test' ).append( newBigThumb );
-          // });
-
           if(thumbImgA == '' || thumbImgB == '') {
             alert('no image!');
           }
@@ -142,6 +118,7 @@ $(document).ready(function() {
     
   }
 
+  // Voting //////////////////////////////////////////////////////////
   // Vote reset button function
   $('#voteForA, #voteForB').on('click', function voteReset() {
     $( "#voteForA, #voteForB" ).prop( "disabled", true ); // disables vote button after vote is cast
@@ -159,7 +136,7 @@ $(document).ready(function() {
   })
 
 
-  // sends input to Firebase
+  // sends input to Firebase /////////////////////////////////////////////////
   function voteEvent(dataid){
     console.log(dataid)
     var $voteBInput = $('div#band'+dataid+'-name');
@@ -212,7 +189,7 @@ $(document).ready(function() {
     $voteBInput.val("");
   }
 
-  // updating data
+  // updating data /////////////////////////////////////////////////
   function updateVotes(bandAlbumNameID, votes) {
     var ref = new Firebase("https://bandbattle.firebaseio.com/matchups/" + bandAlbumNameID);
     ref.update({ votes: votes });

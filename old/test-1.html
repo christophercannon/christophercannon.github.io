@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Battle of the Bands</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+</head>
+<body>
+
+  <h1>Hot or Not: Vinyl Edition</h1>
+
+  <div id="styleMenu">
+    <select name="dropdown" size=1>
+      <option>Select a musical style</option>
+      <option value="Hardcore">Hardcore</option>
+      <option value="Doom Metal">Doom Metal</option>
+      <option value="Reggae">Reggae</option>
+      <option value="Indie Rock">Indie rock</option>
+      <option value="Shoegaze">Shoegaze</option>
+      <option value="Hip Hop">Hip hop</option>
+      <option value="Surf">Surf</option>
+      <option value="Post-Punk">Post-Punk</option>
+      <option value="Garage Rock">Garage Rock</option>
+    </select>
+
+    <input class='input' id='yearInput' placeholder="Enter a year or timespan"></input>
+    <button id="doSearch">Do it!</button>
+  </div>
+
+
+  <div id="bandA-element">
+    <div id="bandA-img" band-id="A"></div>
+    <div id="bandA-name" class="bandName" band-id="A"></div>
+    <button id="voteForA" data-id="A">This one rules!</button>
+    <div id="bandA-results" band-id="A"></div>
+  </div>
+
+  <div id="bandB-element">
+    <div id="bandB-img" band-id="B"></div>
+    <div id="bandB-name" class="bandName" band-id="B"></div>
+    <button id="voteForB" data-id="B">No, this one rules!</button>
+    <div id="bandB-results" band-id="B"></div>
+  </div>
+	
+	<!-- <script src="jquery-1.12.2.min.js.css"></script> -->
+  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="test-1.js" type="text/javascript" charset="utf-8" async defer></script>
+
+
+</body>
+</html>

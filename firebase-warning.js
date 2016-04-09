@@ -1,0 +1,1 @@
+FIREBASE WARNING: Exception was thrown by user callback. Error: Firebase.DataSnapshot.hasChild failed: First argument was an invalid path: "Wu-Tang Clan - C.R.E.A.M. (Cash Rules Everything Around Me)". Paths must be non-empty strings and can't contain ".", "#", "$", "[", or "]"
