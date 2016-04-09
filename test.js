@@ -42,6 +42,7 @@ $(document).ready(function() {
         type:'master', // was 'release'
         // sort: 'want%2Cdesc',
         year: valYearInput,
+        format: 'Vinyl',
         genre: genreType,
         style: selectedStyle,
         per_page: 100
