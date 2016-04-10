@@ -19,11 +19,17 @@ h1 {
   width: 160px;
 }
 
+#content {
+	display: block;
+	position: absolute;
+	top: 150px;
+}
+
 #bandA-element, #bandB-element {
 	/*display: block;*/
 	width: 350px;
 	float: left;
-	margin: 20px 40px 0px 0px;
+	margin: 0px 40px 0px 0px;
 }
 
 .thumb {
