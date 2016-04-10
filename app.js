@@ -16,6 +16,7 @@ $(document).ready(function() {
       var discogsApiUrl = "https://api.discogs.com/database/search";
 
       // reset img and text divs
+      $('#error').empty();
       $('#bandA-img, #bandB-img').empty();
       $('#bandA-name, #bandB-name').empty();
       $('#voteForA, #voteForB').css({'display': 'none'});
@@ -37,7 +38,7 @@ $(document).ready(function() {
 
 
       var params = {
-        q: 'The Middle Class', // query empty, can get user input for refined search
+        q: '', // query empty, can get user input for refined search
         key: 'WwxjcqYkafscMAPPikTJ',
         secret: 'uwErYCQYspUPCqzmwfdoLwHdflJQJjbQ',
         type:'master', // was 'release'
@@ -54,7 +55,7 @@ $(document).ready(function() {
         var results = response.results;
         // console.log(results);
         if(results == 0) {
-          alert('nothing to return!');
+          $('#error').html('No records in this style and year... try something else.');
         }
 
         // generate random object A /////////////////////////////////////////////////
@@ -95,7 +96,7 @@ $(document).ready(function() {
         if(results.length > 1) {
           numCheck(rand1);
         } else if(results.length == 1) {
-          alert('Only one record returned. Try again.');
+          $('#error').html('Only one record returned... try something else.');
           $('#voteForA, #voteForB').css({'display': 'none'});
         }
         
