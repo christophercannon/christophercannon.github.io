@@ -37,7 +37,7 @@ $(document).ready(function() {
 
 
       var params = {
-        q: '', // query empty, can get user input for refined search
+        q: 'The Middle Class', // query empty, can get user input for refined search
         key: 'WwxjcqYkafscMAPPikTJ',
         secret: 'uwErYCQYspUPCqzmwfdoLwHdflJQJjbQ',
         type:'master', // was 'release'
@@ -66,7 +66,7 @@ $(document).ready(function() {
 
         // if no image available, use generic img
         if(thumbImgA == '') {
-          thumbImgA = 'img/default-release.png';
+          thumbImgA = 'img/default-release-2.png';
         }
 
         var newThumb = $('<div class="thumb"></div>');
@@ -96,6 +96,7 @@ $(document).ready(function() {
           numCheck(rand1);
         } else if(results.length == 1) {
           alert('Only one record returned. Try again.');
+          $('#voteForA, #voteForB').css({'display': 'none'});
         }
         
         function nonDupeNum(rand2) {
@@ -107,7 +108,7 @@ $(document).ready(function() {
 
           // if no image available, use generic img
           if(thumbImgB == '') {
-            thumbImgB = 'img/default-release.png';
+            thumbImgB = 'img/default-release-2.png';
           }
 
           var newThumb = $('<div class="thumb"></div>');
