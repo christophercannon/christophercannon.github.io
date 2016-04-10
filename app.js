@@ -2,6 +2,9 @@ $(document).ready(function() {
 	
   var bandBattleData = new Firebase("https://bandbattle.firebaseio.com/");
 
+  var myKey = '?key=WwxjcqYkafscMAPPikTJ';
+  var mySecret = '&secret=uwErYCQYspUPCqzmwfdoLwHdflJQJjbQ';
+
 	// $('#bandInput').keypress(queryDBfunction);
   $('#doSearch').on('click', queryDBfunction);
   $('#yearInput').on('keypress', function(e) {
@@ -21,7 +24,6 @@ $(document).ready(function() {
       $('#bandA-name, #bandB-name').empty();
       $('#voteForA, #voteForB').css({'display': 'none'});
       $('#bandA-results, #bandB-results').empty();
-      $( '#test' ).empty();
 
       // resets vote btn functionality on new matchup
       $( "#voteForA, #voteForB" ).prop( "disabled", false );
@@ -65,64 +67,91 @@ $(document).ready(function() {
         console.log(rand1);
         console.log(thumbImgA);
 
-        // if no image available, use generic img
-        if(thumbImgA == '') {
-          thumbImgA = 'img/default-release-2.png';
-        }
+        // get big images /////////////////////////////////////////////////
+        // get big image A
+        var resourceUrlA = results[rand1].resource_url;
+        var idImgA = results[rand1].id;
+        var bigImgAUrl = ('https://api.discogs.com/masters/' + idImgA + myKey + mySecret);
+        console.log(bigImgAUrl);
 
-        var newThumb = $('<div class="thumb"></div>');
-        newThumb.css('background-image', 'url("' + thumbImgA + '")');
-        $(newThumb).fadeOut(0).fadeIn(1500);
-        $('#bandA-img').append( newThumb );
-        $('#bandA-img').wrap( '<a href="' + linkImgA + '" target="_blank"></a>' );
-        $('#bandA-name').fadeOut(0).fadeIn(1500);
-        $('#bandA-name').html(results[rand1].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>')
-            .attr('data-name' , results[rand1].title.replace(/[\\\/]/g,'')); 
-        $('#voteForA').fadeOut(0).fadeIn(1500);
 
-        // new function to avoid duplicate numbers
-        function numCheck(n1) {
-          var n2 = Math.floor(Math.random() * results.length);
-          console.log(n1, n2);
-          if(n1==n2) {
-            numCheck(n1);
-          } else {
-            nonDupeNum(n2);
-          }
-        }
-
-        // generate random object B /////////////////////////////////////////////////
-        // checks for results array length
-        if(results.length > 1) {
-          numCheck(rand1);
-        } else if(results.length == 1) {
-          $('#error').html('Only one record returned... try something else.');
-          $('#voteForA, #voteForB').css({'display': 'none'});
-        }
-        
-        function nonDupeNum(rand2) {
-          // generate random object B
-          var thumbImgB = results[rand2].thumb;
-          var linkImgB = ('http://discogs.com' + results[rand2].uri);
-          console.log(rand2);
-          console.log(thumbImgB);
+        $.getJSON(bigImgAUrl, function(imgResponse) {
+          console.log('response: ',imgResponse);
 
           // if no image available, use generic img
-          if(thumbImgB == '') {
-            thumbImgB = 'img/default-release-2.png';
+          if(typeof imgResponse.images != 'undefined') {
+            var imgAResult = imgResponse.images[0].uri;
+            console.log('Big img url A: ', imgAResult);
+          } else {
+            imgAResult = 'img/default-release-2.png';
           }
 
           var newThumb = $('<div class="thumb"></div>');
-          newThumb.css('background-image', 'url("' + thumbImgB + '")');
+          newThumb.css('background-image', 'url("' + imgAResult + '")');
           $(newThumb).fadeOut(0).fadeIn(1500);
-          $('#bandB-img').append( newThumb );
-          $('#bandB-img').wrap( '<a href="' + linkImgB + '" target="_blank"></a>' );
-          $('#bandB-name').fadeOut(0).fadeIn(1500);
-          $('#bandB-name').html(results[rand2].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>')
-            .attr('data-name' , results[rand2].title.replace(/[\\\/]/g,'')); 
-          $('#voteForB').fadeOut(0).fadeIn(1500);
-        }
+          $('#bandA-img').append( newThumb );
+          $('#bandA-img').wrap( '<a href="' + linkImgA + '" target="_blank"></a>' );
+          $('#bandA-name').fadeOut(0).fadeIn(1500);
+          $('#bandA-name').html(results[rand1].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>')
+              .attr('data-name' , results[rand1].title.replace(/[\\\/]/g,'')); 
+          $('#voteForA').fadeOut(0).fadeIn(1500);
 
+          // new function to avoid duplicate numbers
+          function numCheck(n1) {
+            var n2 = Math.floor(Math.random() * results.length);
+            console.log(n1, n2);
+            if(n1==n2) {
+              numCheck(n1);
+            } else {
+              nonDupeNum(n2);
+            }
+          }
+
+          // generate random object B /////////////////////////////////////////////////
+          // checks for results array length
+          if(results.length > 1) {
+            numCheck(rand1);
+          } else if(results.length == 1) {
+            $('#error').html('Only one record returned... try something else.');
+            $('#voteForA, #voteForB').css({'display': 'none'});
+          }
+          
+          function nonDupeNum(rand2) {
+            // generate random object B
+            var thumbImgB = results[rand2].thumb;
+            var linkImgB = ('http://discogs.com' + results[rand2].uri);
+            console.log(rand2);
+            console.log(thumbImgB);
+
+            // get big image B
+            var resourceUrlB = results[rand2].resource_url;
+            var idImgB = results[rand2].id;
+            var bigImgBUrl = ('https://api.discogs.com/masters/' + idImgB + myKey + mySecret);
+            console.log(bigImgBUrl);
+
+            $.getJSON(bigImgBUrl, function(imgResponse) {
+              console.log('response: ',imgResponse);
+
+              // if no image available, use generic img
+              if(typeof imgResponse.images != 'undefined') {
+                var imgBResult = imgResponse.images[0].uri;
+                console.log('Big img url B: ', imgBResult);
+              } else {
+                imgBResult = 'img/default-release-2.png';
+              }
+
+              var newThumb = $('<div class="thumb"></div>');
+              newThumb.css('background-image', 'url("' + imgBResult + '")');
+              $(newThumb).fadeOut(0).fadeIn(1500);
+              $('#bandB-img').append( newThumb );
+              $('#bandB-img').wrap( '<a href="' + linkImgB + '" target="_blank"></a>' );
+              $('#bandB-name').fadeOut(0).fadeIn(1500);
+              $('#bandB-name').html(results[rand2].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>')
+                .attr('data-name' , results[rand2].title.replace(/[\\\/]/g,'')); 
+              $('#voteForB').fadeOut(0).fadeIn(1500);
+            });
+          }
+        });
       });
     
   }

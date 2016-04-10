@@ -21,19 +21,21 @@ h1 {
 
 #bandA-element, #bandB-element {
 	/*display: block;*/
-	width: 150px;
+	width: 350px;
 	float: left;
 	margin: 20px 40px 0px 0px;
 }
 
 .thumb {
 	display: block;
-	height: 150px;
-	width: 150px;
+	height: 350px;
+	width: 350px;
 	background-color: #efefef;
 	margin: 0 5px 5px 0;
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: 350px 350px;
+	background-position: left top;
+	/*border: 1px solid #ccc;*/
 }
 
 #bandA-name, #bandB-name {
@@ -52,20 +54,3 @@ h1 {
   cursor: pointer;
 }
 
-#test {
-	display: block;
-	float: right;
-	right: 10px;
-	top: 10px;
-	width: 400px;
-	height: 400px;
-	background-color: #efefef;
-}
-
-.bigThumb {
-	display: inline-block;
-	height: 400px;
-	width: 400px;
-	background-color: #efefef;
-	margin: 0;
-}
