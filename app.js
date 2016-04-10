@@ -64,6 +64,11 @@ $(document).ready(function() {
         console.log(rand1);
         console.log(thumbImgA);
 
+        // if no image available, use generic img
+        if(thumbImgA == '') {
+          thumbImgA = 'img/default-release.png';
+        }
+
         var newThumb = $('<div class="thumb"></div>');
         newThumb.css('background-image', 'url("' + thumbImgA + '")');
         $(newThumb).fadeOut(0).fadeIn(1500);
@@ -99,6 +104,12 @@ $(document).ready(function() {
           var linkImgB = ('http://discogs.com' + results[rand2].uri);
           console.log(rand2);
           console.log(thumbImgB);
+
+          // if no image available, use generic img
+          if(thumbImgB == '') {
+            thumbImgB = 'img/default-release.png';
+          }
+
           var newThumb = $('<div class="thumb"></div>');
           newThumb.css('background-image', 'url("' + thumbImgB + '")');
           $(newThumb).fadeOut(0).fadeIn(1500);
@@ -108,10 +119,6 @@ $(document).ready(function() {
           $('#bandB-name').html(results[rand2].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>')
             .attr('data-name' , results[rand2].title.replace(/[\\\/]/g,'')); 
           $('#voteForB').fadeOut(0).fadeIn(1500);
-
-          if(thumbImgA == '' || thumbImgB == '') {
-            alert('no image!');
-          }
         }
 
       });
