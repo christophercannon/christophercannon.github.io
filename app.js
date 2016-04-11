@@ -72,7 +72,7 @@ $(document).ready(function() {
 
 
         // get big images /////////////////////////////////////////////////
-        
+
         // get big image A
         var resourceUrlA = results[rand1].resource_url;
         var idImgA = results[rand1].id;
@@ -97,7 +97,7 @@ $(document).ready(function() {
           $('#bandA-img').append( newThumb );
           $('#bandA-img').wrap( '<a href="' + linkImgA + '" target="_blank"></a>' );
           $('#bandA-name').fadeOut(0).fadeIn(1500);
-          $('#bandA-name').html(results[rand1].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>').attr('data-name' , results[rand1].title.replace(/[\\\/]/g,'').replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, ' '));
+          $('#bandA-name').html(results[rand1].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>').attr('data-name' , results[rand1].title.replace(/[\\\/]/g,'').replace(/[_\s]/g, ' '));
           $('#voteForA').fadeOut(0).fadeIn(1500);
 
           // new function to avoid duplicate numbers
@@ -151,7 +151,7 @@ $(document).ready(function() {
               $('#bandB-img').append( newThumb );
               $('#bandB-img').wrap( '<a href="' + linkImgB + '" target="_blank"></a>' );
               $('#bandB-name').fadeOut(0).fadeIn(1500);
-              $('#bandB-name').html(results[rand2].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>').attr('data-name' , results[rand2].title.replace(/[\\\/]/g,'').replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, ' ')); 
+              $('#bandB-name').html(results[rand2].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>').attr('data-name' , results[rand2].title.replace(/[\\\/]/g,'').replace(/[_\s]/g, ' ')); 
               $('#voteForB').fadeOut(0).fadeIn(1500);
             });
           }
