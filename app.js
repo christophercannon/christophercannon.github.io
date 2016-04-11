@@ -27,7 +27,7 @@ $(document).ready(function() {
 
       // resets vote btn functionality on new matchup
       $( "#voteForA, #voteForB" ).prop( "disabled", false );
-      $( "#voteForA, #voteForB" ).css({'cursor': 'pointer'});
+      $( "#voteForA, #voteForB" ).css({'cursor': 'pointer', 'opacity': '1'});
 
       // logic to further specify return results
       var genreType = 'Rock';
@@ -57,7 +57,7 @@ $(document).ready(function() {
         var results = response.results;
         // console.log(results);
         if(results == 0) {
-          $('#error').html('No records in this style and year... try something else.');
+          $('#error').fadeIn(1000).html('No records in this style and year... try something else.');
         }
 
         // generate random object A /////////////////////////////////////////////////
@@ -158,7 +158,7 @@ $(document).ready(function() {
   // Vote reset button function
   $('#voteForA, #voteForB').on('click', function voteReset() {
     $( "#voteForA, #voteForB" ).prop( "disabled", true ); // disables vote button after vote is cast
-    $( "#voteForA, #voteForB" ).css({'cursor': 'default'}); // hides pointer after casting vote
+    $( "#voteForA, #voteForB" ).css({'cursor': 'default', 'opacity': '0.25'}); // hides pointer, adj opacity after casting vote
   })
 
 
