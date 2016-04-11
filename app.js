@@ -5,7 +5,6 @@ $(document).ready(function() {
   var myKey = '?key=WwxjcqYkafscMAPPikTJ';
   var mySecret = '&secret=uwErYCQYspUPCqzmwfdoLwHdflJQJjbQ';
 
-	// $('#bandInput').keypress(queryDBfunction);
   $('#doSearch').on('click', queryDBfunction);
   $('#yearInput').on('keypress', function(e) {
     if(e.keyCode == 13) queryDBfunction(e);
@@ -71,7 +70,9 @@ $(document).ready(function() {
         console.log(rand1);
         console.log(thumbImgA);
 
+
         // get big images /////////////////////////////////////////////////
+        
         // get big image A
         var resourceUrlA = results[rand1].resource_url;
         var idImgA = results[rand1].id;
@@ -111,6 +112,7 @@ $(document).ready(function() {
           }
 
           // generate random object B /////////////////////////////////////////////////
+
           // checks for results array length
           if(results.length > 1) {
             numCheck(rand1);
@@ -159,6 +161,7 @@ $(document).ready(function() {
   }
 
   // Voting //////////////////////////////////////////////////////////
+
   // Vote reset button function
   $('#voteForA, #voteForB').on('click', function voteReset() {
     $( "#voteForA, #voteForB" ).prop( "disabled", true ); // disables vote button after vote is cast
