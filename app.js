@@ -33,8 +33,12 @@ $(document).ready(function() {
       var genreType = 'Rock';
       if(selectedStyle == 'Hip Hop') {
         genreType = 'Hip Hop';
-      } else if(selectedStyle == 'Reggae') {
+      } else if(selectedStyle == 'Roots Reggae') {
         genreType = 'Reggae';
+      } else if(selectedStyle == 'Drum n Bass') {
+        genreType = 'Electronic';
+      } else if(selectedStyle == 'Hard Bop') {
+        genreType = 'Jazz';
       }
       console.log(genreType);
 
