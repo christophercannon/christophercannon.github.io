@@ -216,7 +216,12 @@ $(document).ready(function() {
 
           console.log('updatedVotes', updatedVotes);
 
-          $('#band'+dataid+'-results').html('You and <span class="voteNum">' + (updatedVotes-1) + ' other people</span> like this album.');
+          // proper grammar -- person vs. people
+          if((updatedVotes-1)==1) {
+            $('#band'+dataid+'-results').html('You and <span class="voteNum">' + (updatedVotes-1) + ' other person</span> like this album.');
+          } else {
+            $('#band'+dataid+'-results').html('You and <span class="voteNum">' + (updatedVotes-1) + ' other people</span> like this album.');
+          }
 
           updateVotes(inputArtist, updatedVotes);
         })
