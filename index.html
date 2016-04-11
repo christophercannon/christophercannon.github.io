@@ -8,41 +8,49 @@
 </head>
 <body>
 
-  <h1>Hot or Not: Vinyl Edition</h1>
+  <div id="wrapper">
+    <div id="content">
+      <h1>Hot or Not: Vinyl Edition</h1>
 
-  <div id="styleMenu">
-    <select name="dropdown" size=1>
-      <option>Select a musical style</option>
-      <option value="Hardcore">Hardcore</option>
-      <option value="Doom Metal">Doom Metal</option>
-      <option value="Reggae">Reggae</option>
-      <option value="Indie Rock">Indie rock</option>
-      <option value="Shoegaze">Shoegaze</option>
-      <option value="Hip Hop">Hip hop</option>
-      <option value="Surf">Surf</option>
-      <option value="Post-Punk">Post-Punk</option>
-      <option value="Garage Rock">Garage Rock</option>
-    </select>
+      <div id="styleMenu">
+        <span class="custom-dropdown custom-dropdown-color">
+          <select class="custom-dropdown_select custom-dropdown_select-color" name="dropdown">
+            <option>Select a musical style</option>
+            <option value="Hardcore">Hardcore</option>
+            <option value="Doom Metal">Doom Metal</option>
+            <option value="Reggae">Reggae</option>
+            <option value="Indie Rock">Indie rock</option>
+            <option value="Shoegaze">Shoegaze</option>
+            <option value="Hip Hop">Hip hop</option>
+            <option value="Surf">Surf</option>
+            <option value="Post-Punk">Post-Punk</option>
+            <option value="Garage Rock">Garage Rock</option>
+          </select>
+        </span>
 
-    <input class='input' id='yearInput' type="text" placeholder="Enter a year or timespan">
-    <input id="doSearch" type="submit" value="Do it!">
-  </div>
+        <input class='input' id='yearInput' type="text" placeholder="Enter a year or timespan">
+        <input id="doSearch" type="submit" value="Do it!">
+      </div>
 
 
-  <div id="content">
-    <div id="error"></div>
-    <div id="bandA-element">
-      <div id="bandA-img"></div>
-      <div id="bandA-name" class="bandName"></div>
-      <button id="voteForA" data-id="A">This one rules!</button>
-      <div id="bandA-results"></div>
-    </div>
+      <div id="error"></div>
+      <div id="band-content">
 
-    <div id="bandB-element">
-      <div id="bandB-img"></div>
-      <div id="bandB-name" class="bandName"></div>
-      <button id="voteForB" data-id="B">No, this one rules!</button>
-      <div id="bandB-results"></div>
+        <div id="bandA-element">
+          <div id="bandA-img"></div>
+          <div id="bandA-name" class="bandName"></div>
+          <input id="voteForA" data-id="A" type="submit" value="This one rules!">
+          <div id="bandA-results"></div>
+        </div>
+
+        <div id="bandB-element">
+          <div id="bandB-img"></div>
+          <div id="bandB-name" class="bandName"></div>
+          <input id="voteForB" data-id="B" type="submit" value="No, this one rules!">
+          <div id="bandB-results"></div>
+        </div>
+      </div>
+
     </div>
   </div>
 	

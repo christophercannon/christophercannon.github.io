@@ -1,28 +1,148 @@
 body {
 	font-family: sans-serif;
-	margin: 20px;
+  margin: 0px;
+	padding: 40px;
+  background-color: black;
+  border-top: 6px solid #00cc99;
+}
+
+#wrapper {
+  width: 100%;
+  height: auto;
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+  text-align: center;
+}
+
+#content {
+  width: 780px;
+  height: auto;
+  display: inline-block;
+  position: relative;
+  padding: 0px;
 }
 
 h1 {
+  font: 700 52px/52px Helvetica, Arial;
 	padding: 0px;
-	margin: 0px 0px 20px 0px;
+	margin: 0px;
+  color: #00cc99;
+  text-align: left;
 }
 
 #styleMenu {
-	display: block;
-	float: left;
-	margin-bottom: 40px;
-	width: 100%;
+  position: relative;
+  display: inline-block;
+  margin: 60px 0px 70px 0px;
+  width: 780px;
+  text-align: left;
 }
 
 #yearInput {
   width: 160px;
 }
 
-#content {
-	display: block;
-	position: absolute;
-	top: 150px;
+
+/* ---------- dropdown styles ---------- */
+
+.custom-dropdown_select{
+	font-size: 21px; /* inherit size from .custom-dropdown */
+	padding: .5em; /* add some space*/
+	margin: 0; /* remove default margins */
+  outline: none; /* remove blue glow */
+}
+
+.custom-dropdown_select-color {
+	background-color: #fff;
+	color: #444;    
+}
+
+@supports (pointer-events: none) and
+	  ((-webkit-appearance: none) or
+	  (-moz-appearance: none) or
+	  (appearance: none)) {
+
+	.custom-dropdown {
+		position: relative;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.custom-dropdown_select {
+		padding-right: 2.5em; /* accommodate with the pseudo elements for the dropdown arrow */
+		border: 0;
+		border-radius: 3px;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;    
+	}
+
+	.custom-dropdown::before,
+	.custom-dropdown::after {
+		content: "";
+		position: absolute;
+		pointer-events: none;
+	}
+
+	.custom-dropdown::after { /*  Custom dropdown arrow */
+		content: "\25BC";
+		height: 1em;
+		font-size: .625em;
+		line-height: 1;
+		right: 1.2em;
+		top: 50%; margin-top: -.5em;
+	}
+
+	.custom-dropdown::before { /*  Custom dropdown arrow cover */
+		width: 2em;
+		right: 0; top: 0; bottom: 0;
+		border-radius: 0 3px 3px 0;
+	}
+
+	.custom-dropdown_select[disabled] {
+		color: rgba(0,0,0,.3);
+	}
+
+	.custom-dropdown.custom-dropdown-disabled::after {
+		color: rgba(0,0,0,.1);
+	}
+
+	/* Color dropdown style */
+	.custom-dropdown-color::before {
+		background-color: #fff;
+		border-left: 1px solid rgba(0,0,0,.1);
+	}
+
+	.custom-dropdown-color::after {
+		color: rgba(0,0,0,.9);
+	}
+
+	/* FF only temp fix */
+	@-moz-document url-prefix() {
+		.custom-dropdown_select 			 { padding-right: .9em }
+		.custom-dropdown-large .custom-dropdown_select { padding-right: 1.3em }
+		.custom-dropdown-small .custom-dropdown_select { padding-right: .5em }
+	}
+}
+
+/* ---------- dropdown styles end ---------- */
+
+
+#band-content {
+  position: relative;
+  display: block;
+  margin: 0px auto;
+  width: 780px;
+  text-align: left;
+}
+
+#error {
+  display: block;
+  margin-bottom: 20px;
+  font: 500 24px/24px Helvetica, Arial;
+  color: #666;
+  text-align: left;
 }
 
 #bandA-element, #bandB-element {
@@ -36,20 +156,28 @@ h1 {
 	display: block;
 	height: 350px;
 	width: 350px;
-	background-color: #efefef;
+	background-color: #000;
 	margin: 0 5px 5px 0;
 	background-repeat: no-repeat;
 	background-size: 350px 350px;
 	background-position: left top;
-	/*border: 1px solid #ccc;*/
+	outline: 1px solid #222;
 }
 
 #bandA-name, #bandB-name {
 	height: 100px;
+  color: white;
+}
+
+.bandName {
+  padding-top: 20px;
+  font: 700 26px/26px Helvetica, Arial;
+  color: white;
 }
 
 .albumName {
-	color: #ff6633;
+  font: 500 21px/26px Helvetica, Arial;
+	color: #00cc99;
 }
 
 #voteForA, #voteForB {
@@ -59,4 +187,17 @@ h1 {
 #voteForA:hover, #voteForB:hover {
   cursor: pointer;
 }
+
+#bandA-results, #bandB-results {
+  margin-top: 20px;
+  text-align: left;
+  font: 500 16px/16px Helvetica, Arial;
+  color: #999;
+}
+
+.voteNum {
+  color: white;
+  font-weight: bold;
+}
+
 

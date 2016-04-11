@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 
       var params = {
-        q: 'answer', // query empty, can get user input for refined search
+        q: '', // query empty, can get user input for refined search
         key: 'WwxjcqYkafscMAPPikTJ',
         secret: 'uwErYCQYspUPCqzmwfdoLwHdflJQJjbQ',
         type:'master', // was 'release'
