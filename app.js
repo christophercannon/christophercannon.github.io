@@ -38,6 +38,8 @@ $(document).ready(function() {
         genreType = 'Electronic';
       } else if(selectedStyle == 'Hard Bop') {
         genreType = 'Jazz';
+      } else if(selectedStyle == 'Soundtrack') {
+        genreType = '';
       }
       console.log(genreType);
 
