@@ -119,7 +119,7 @@ $(document).ready(function() {
           if(results.length > 1) {
             numCheck(rand1);
           } else if(results.length == 1) {
-            $('#error').html('Only one record returned... try something else.');
+            $('#error').fadeIn(1000).html('Only one record returned... try something else.');
             $('#voteForA, #voteForB').css({'display': 'none'});
           }
           
