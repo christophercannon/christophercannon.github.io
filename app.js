@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 
       var params = {
-        q: '', // query empty, can get user input for refined search
+        q: 'answer', // query empty, can get user input for refined search
         key: 'WwxjcqYkafscMAPPikTJ',
         secret: 'uwErYCQYspUPCqzmwfdoLwHdflJQJjbQ',
         type:'master', // was 'release'
@@ -92,8 +92,7 @@ $(document).ready(function() {
           $('#bandA-img').append( newThumb );
           $('#bandA-img').wrap( '<a href="' + linkImgA + '" target="_blank"></a>' );
           $('#bandA-name').fadeOut(0).fadeIn(1500);
-          $('#bandA-name').html(results[rand1].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>')
-              .attr('data-name' , results[rand1].title.replace(/[\\\/]/g,'')); 
+          $('#bandA-name').html(results[rand1].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>').attr('data-name' , results[rand1].title.replace(/[\\\/]/g,'').replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, ' '));
           $('#voteForA').fadeOut(0).fadeIn(1500);
 
           // new function to avoid duplicate numbers
@@ -146,8 +145,7 @@ $(document).ready(function() {
               $('#bandB-img').append( newThumb );
               $('#bandB-img').wrap( '<a href="' + linkImgB + '" target="_blank"></a>' );
               $('#bandB-name').fadeOut(0).fadeIn(1500);
-              $('#bandB-name').html(results[rand2].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>')
-                .attr('data-name' , results[rand2].title.replace(/[\\\/]/g,'')); 
+              $('#bandB-name').html(results[rand2].title.replace(/ \([0-9]\)/g,'').replace(/ - /g,'<br><span class="albumName">') + '</span>').attr('data-name' , results[rand2].title.replace(/[\\\/]/g,'').replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, ' ')); 
               $('#voteForB').fadeOut(0).fadeIn(1500);
             });
           }
@@ -209,7 +207,7 @@ $(document).ready(function() {
 
           console.log('updatedVotes', updatedVotes);
 
-          $('#band'+dataid+'-results').html('You and ' + (updatedVotes-1) + ' other people like this album.');
+          $('#band'+dataid+'-results').html('You and <span class="voteNum">' + (updatedVotes-1) + ' other people</span> like this album.');
 
           updateVotes(inputArtist, updatedVotes);
         })
@@ -219,7 +217,7 @@ $(document).ready(function() {
         console.log(inputArtist + " is NOT found in Firebase");
         votes = 1;
         updateVotes(inputArtist, 1);
-        $('#band'+dataid+'-results').html('You are the first person to like this album.');
+        $('#band'+dataid+'-results').html('You are the <span class="voteNum">first person</span> to like this album.');
       }
     })
 
