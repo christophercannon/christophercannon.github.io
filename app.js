@@ -90,7 +90,7 @@ $(document).ready(function() {
             var imgAResult = imgResponse.images[0].uri;
             console.log('Big img url A: ', imgAResult);
           } else {
-            imgAResult = 'img/default-release-2.png';
+            imgAResult = 'img/default-release-3.jpg';
           }
 
           var newThumb = $('<div class="thumb"></div>');
@@ -144,7 +144,7 @@ $(document).ready(function() {
                 var imgBResult = imgResponse.images[0].uri;
                 console.log('Big img url B: ', imgBResult);
               } else {
-                imgBResult = 'img/default-release-2.png';
+                imgBResult = 'img/default-release-3.jpg';
               }
 
               var newThumb = $('<div class="thumb"></div>');
